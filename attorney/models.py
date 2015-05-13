@@ -2,7 +2,6 @@ from django.db import models
 from django.db.models import ImageField
 from localflavor.us.models import USStateField, USZipCodeField, PhoneNumberField
 from localflavor.us.us_states import STATE_CHOICES
-from attornease import settings
 
 
 class LawCategory(models.Model):
