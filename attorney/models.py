@@ -15,6 +15,15 @@ class LawCategory(models.Model):
         return self.title
 
 
+class ServiceArea(models.Model):
+    area = models.CharField(max_length=100)
+    description = models.TextField(default=None, blank=True, null=True)
+    state = USStateField(choices=STATE_CHOICES)
+
+    def __str__(self):
+        return self.area
+
+
 class Attorney(models.Model):
     """
     Main attorney model
@@ -27,6 +36,7 @@ class Attorney(models.Model):
     website = models.URLField(default=None, blank=True)
     rate = models.DecimalField(max_digits=7, decimal_places=2)
     categories = models.ManyToManyField(LawCategory)
+    service_areas = models.ManyToManyField(ServiceArea)
     school = models.CharField(max_length=50)
     year_started = models.IntegerField(default=2015)
     description = models.TextField()

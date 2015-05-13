@@ -77,18 +77,6 @@
                             <th>Name</th>
                             <td>{{ attorney.full_name }}</td>
                         </tr>
-                        <tr>
-                            <th>Affiliated Firm</th>
-                            <td>{{ attorney.firm }}</td>
-                        </tr>
-                        <tr>
-                            <th>Law School</th>
-                            <td>{{ attorney.school }}</td>
-                        </tr>
-                        <tr>
-                            <th>Attorney Since</th>
-                            <td>{{ attorney.year_started }}</td>
-                        </tr>
                         <!-- Law categories list -->
                         {% if attorney.categories.count > 0 %}
                         <tr>
@@ -102,6 +90,32 @@
                             </td>
                         </tr>
                         {% endif %}
+
+                        {% if attorney.service_areas.count > 0 %}
+                        <tr>
+                            <th>Service Areas</th>
+                            <td>
+                                <ul class="list-unstyled">
+                                {% for area in attorney.service_areas.all %}
+                                    <li>{{ area.area }} - {{ area.state }}</li>
+                                {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                        {% endif %}
+
+                        <tr>
+                            <th>Affiliated Firm</th>
+                            <td>{{ attorney.firm }}</td>
+                        </tr>
+                        <tr>
+                            <th>Law School</th>
+                            <td>{{ attorney.school }}</td>
+                        </tr>
+                        <tr>
+                            <th>Attorney Since</th>
+                            <td>{{ attorney.year_started }}</td>
+                        </tr>
 
                         {% if attorney.license_set.count > 0 %}
                             <tr>
