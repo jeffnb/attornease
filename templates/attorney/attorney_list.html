@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}AttornEase - Attorney Results{% endblock %}
+
+{% block main_container %}
+
+<header class="main-header">
+    <div class="container">
+        <h1 class="page-title">Available Attorneys - {{ selected_category.title|default:'All Categories' }} in {{ selected_area.area }}</h1>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 hidden-sm hidden-xs">
+            <div class="ec-filters-menu">
+                <h3 class="section-title no-margin-top">Filters</h3>
+                <h4>Select Category</h4>
+                <ul>
+                    <li><a href="{%  url "attorney_list" selected_area.id %}" class="filter">All</a></li>
+                    {% for cat in categories %}
+                    <li><a href="{%  url "attorney_list_cat" selected_area.id cat.id %}" class="filter">{{ cat.title }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% if areas.all.count > 0 %}
+                <h4>Select Service Area</h4>
+                <ul>
+                    {% for area in areas %}
+                    <li><a href="{%  url "attorney_list" area.id %}" class="filter">{{ area.area }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+{#                <h4>Order by</h4>#}
+{#                <ul>#}
+{#                    <li><a href="javascript:void(0);" class="sort" data-sort="price:asc">Price: Low to High</a></li>#}
+{#                    <li><a href="javascript:void(0);" class="sort" data-sort="price:desc">Price: High to Lo</a></li>#}
+{#                    <li><a href="javascript:void(0);" class="sort" data-sort="popularity:desc">Most Popular</a></li>#}
+{#                    <li><a href="javascript:void(0);" class="sort" data-sort="date:desc">Release Date</a></li>#}
+{#                </ul>#}
+            </div>
+        </div>
+        <div class="col-md-9">
+            {% for attorney in object_list %}
+            <div class="content-box box-default">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{{ attorney.profile_pic.url }}" alt="Profile Picture" class="img-responsive">
+                    </div>
+                    <div class="col-md-8">
+                        <h2 class="content-box-title no-margin-top">{{ attorney.full_name }}</h2>
+                        <hr class="no-margin-top">
+                        <dl class="dl-horizontal">
+                            <dt>Hourly Rate:</dt>
+                            <dd>{{ attorney.rate }}</dd>
+                            <dt>Attorney Since:</dt>
+                            <dd>{{ attorney.year_started }}</dd>
+                        </dl>
+                        <p class="text-left">{{ attorney.abridged }}</p>
+                        <a href="{% url "attorney_detail" attorney.id %}" class="btn btn-ar btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="content-box box-default">
+                No Attorneys Found
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div> <!-- container -->
+{% endblock %}

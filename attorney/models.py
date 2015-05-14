@@ -50,6 +50,14 @@ class Attorney(models.Model):
     def full_name(self):
         return self.first_name + " " + self.last_name
 
+    def abridged(self):
+        if len(self.description) < 150:
+            desc = self.description
+        else:
+            desc = self.description[:150]
+            desc = desc[:desc.rfind(".")+1]+"..."
+        return desc
+
 
 class License(models.Model):
     """
