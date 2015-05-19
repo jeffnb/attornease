@@ -1,0 +1,13 @@
+Django==1.8.1
+Pillow==2.8.1
+beautifulsoup4==4.3.2
+django-generic-positions==0.1.7
+django-hvad==1.2.1
+django-libs==1.66.1
+django-localflavor==1.1
+django-review==1.9.2
+django-user-media==1.1.6
+easy-thumbnails==2.2
+factory-boy==2.5.2
+gnureadline==6.3.3
+simplejson==3.6.5
